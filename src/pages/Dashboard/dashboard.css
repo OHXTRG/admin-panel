@@ -1,0 +1,97 @@
+.dashbaord-wrapper {
+  height: 100%;
+}
+
+.dashbaord-wrapper .dashboard-head {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 100%;
+}
+
+.dashbaord-wrapper .dashboard-cards-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 30px;
+  margin-top: 30px;
+  justify-content: space-between;
+}
+
+.dashbaord-wrapper .dashboard-cards-wrapper .card-ds {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #fdfdff;
+  background: linear-gradient(180deg, #fdfdff 0%, #f3f6ff 100%);
+  box-shadow: 4px 0px 24px rgba(0, 0, 0, 0.08);
+}
+
+.dashbaord-wrapper .dashboard-cards-wrapper .card-ds .img-wrapper {
+  width: 26%;
+  overflow: hidden;
+}
+
+.dashbaord-wrapper .dashboard-cards-wrapper .card-ds .content {
+  margin-top: 20px;
+}
+.dashbaord-wrapper .dashboard-cards-wrapper .card-ds .content .count {
+  font-size: 31px;
+  font-weight: 700;
+  display: block;
+}
+.dashbaord-wrapper .dashboard-cards-wrapper .card-ds .content .label {
+  font-size: 16px;
+  font-weight: 500;
+  display: block;
+}
+
+.dashbaord-wrapper .recent-workout {
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 45px;
+  /* background: linear-gradient(180deg, #fdfdff 0%, #f3f6ff 100%);
+  box-shadow: 4px 0px 24px rgba(0, 0, 0, 0.08); */
+  height: 44dvh;
+}
+
+.dashbaord-wrapper .recent-workout .head {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.dashbaord-wrapper .table-wrapper {
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid #18181826; */
+  overflow: auto;
+  border-radius: 8px;
+  overflow: auto;
+  background: linear-gradient(180deg, #fdfdff 0%, #f3f6ff 100%);
+  box-shadow: 4px 0px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Hide scrollbar normally */
+.dashbaord-wrapper .table-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 0; /* for horizontal */
+  background-color: transparent;
+}
+
+/* On hover, show scrollbar */
+.dashbaord-wrapper .table-wrapper:hover::-webkit-scrollbar {
+  width: 8px; /* your desired size */
+  /* height: 5px; */
+}
+
+/* Scrollbar track */
+.dashbaord-wrapper .table-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Scrollbar thumb */
+.dashbaord-wrapper .table-wrapper::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 5px;
+}
+
+.dashbaord-wrapper .table-wrapper:hover::-webkit-scrollbar-thumb {
+  background: #18181826;
+}

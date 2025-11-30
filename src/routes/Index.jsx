@@ -1,30 +1,68 @@
-import React from "react";
 import { Routes, Route } from "react-router";
-import Authenticate from "../Pages/Admin/Authenticate";
-import AdminLayout from "../Pages/Admin/Layout";
-import Dashboard from "../Pages/Admin/Dashboard";
-import Users from "../Pages/Admin/Users";
-import ProtectedRoute from "../Pages/Admin/ProtectedRoute";
+import React from "react";
+import Authenticate from "../pages/Authenticate";
+import ErrorPage from "../pages/ErrorPage";
+import Exercises from "../pages/Exercise/Exercises";
+import Workouts from "../pages/workouts/Workouts";
+import Settings from "../pages/Settings";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import ProtectedRoute from "../utils/ProtectedRoutes";
 import { useSelector } from "react-redux";
 
 const Index = () => {
-  const user = useSelector((state) => state.user);
-  console.dir(user);
+  const { isAuthenticated } = useSelector((state) => state.user);
+
   return (
-    <Routes>
-      <Route path="/authenticate" element={<Authenticate />} />
-      <Route
-        path="/admin"
-        element={
-          <ProtectedRoute isAuthenticated={user.isAuthenticated}>
-            <AdminLayout />
-          </ProtectedRoute>
-        }
-      >
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="users" element={<Users />} />
-      </Route>
-    </Routes>
+    <>
+      <Routes>
+        <Route path="admin" errorElement={<ErrorPage />}>
+          <Route path="login" element={<Authenticate />} />
+          <Route
+            path="dashboard"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route
+              index
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="workouts"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <Workouts />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="exercises"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <Exercises />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="settings"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <Settings />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+        </Route>
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </>
   );
 };
 

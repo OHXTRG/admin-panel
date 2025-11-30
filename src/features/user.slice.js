@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 const initialState = {
   loading: false,
   error: null,
@@ -9,37 +10,43 @@ const initialState = {
 };
 
 export const loginApi = createAsyncThunk(
-  "user/login",
+  "admin/login",
   async (creds, { rejectWithValue }) => {
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/login`,
+        `${import.meta.env.VITE_API_URL}/admin/auth/login`,
         creds
       );
 
-      console.log(res, "the response of login api");
+      // console.log(res, "the response of login api");
 
-      if (res.data.success) {
+      if (res.data?.success) {
+        toast.success("Login successfully!");
+        localStorage.setItem("token", res.data?.data?.token);
+        localStorage.setItem("user", JSON.stringify(res.data?.data?.user));
         return {
-          user: res.data.user,
-          token: res.data.user,
+          user: res.data?.data?.user,
+          token: res.data?.data?.token,
         };
       } else {
-        rejectWithValue(res.data.message);
+        toast.error(res.data.message);
+        return rejectWithValue(res.data.message);
       }
     } catch (error) {
       console.log(error, "in the catch error of logina pi thunk");
       if (error?.response) {
-        rejectWithValue(error.response.data.message);
+        toast.error(error.response.data.message);
+        return rejectWithValue(error.response.data.message);
       } else {
-        rejectWithValue(error.message);
+        toast.error(error.message);
+        return rejectWithValue(error.message);
       }
     }
   }
 );
 
 const userSlice = createSlice({
-  name: "userState",
+  name: "adminState",
   initialState,
   reducers: {
     logout: (state, action) => {
@@ -48,27 +55,34 @@ const userSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
+    refresh: (state, action) => {
+      state.token = action.payload.token;
+      state.error = null;
+      state.isAuthenticated = true;
+      state.user = action.payload.user;
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(loginApi.pending, (state, action) => {
-      state.loading = true;
-      state.error = false;
-    });
-    builder.addCase(loginApi.fulfilled, (state, action) => {
-      state.isAuthenticated = true;
-      state.error = null;
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.loading = false;
-    });
-    builder.addCase(loginApi.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
+    builder
+      .addCase(loginApi.pending, (state, action) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(loginApi.fulfilled, (state, action) => {
+        state.isAuthenticated = true;
+        state.error = null;
+        state.user = action?.payload?.user;
+        state.token = action?.payload?.token;
+        state.loading = false;
+      })
+      .addCase(loginApi.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action?.payload;
+      });
   },
 });
 
 const { actions, reducer } = userSlice;
 
-export const { loginFailure, loginRequest, loginSuccess } = actions;
+export const { logout, refresh } = actions;
 export default reducer;
