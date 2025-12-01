@@ -27,6 +27,7 @@ import AddIcon from "@mui/icons-material/Add";
 import ExerciseListComponent from "./ExerciseListComponent";
 import { generateUUID } from "../../utils/commonFunctions";
 import MovableExerciseList from "./MovableExerciseList";
+import { preview } from "vite";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -35,7 +36,10 @@ const Index = () => {
   const [loading, setLoading] = useState(false);
   const exerciseData = useSelector((state) => state.exerciseState);
   const [exerciseList, setExerciseList] = useState([
-    { id: "", name: "", list_id: generateUUID() },
+    {
+      selectedObject: { label: "", id: "", thumbnail: "" },
+      list_id: generateUUID(),
+    },
   ]);
 
   const formik = useFormik({
@@ -191,11 +195,21 @@ const Index = () => {
                     cursor: "pointer",
                   },
                 }}
-                onClick={() =>
-                  setExerciseList((prev) => [
-                    ...prev,
-                    { id: "", name: "", list_id: generateUUID() },
-                  ])
+                onClick={
+                  () =>
+                    setExerciseList((prev) => [
+                      ...prev,
+                      {
+                        selectedObject: { label: "", id: "", thumbnail: "" },
+                        list_id: generateUUID(),
+                      },
+                    ])
+                  // setExerciseList((prev) =>
+                  //   prev.push({
+                  //     selectedObject: { label: "", id: "", thumbnail: "" },
+                  //     list_id: generateUUID(),
+                  //   })
+                  // )
                 }
               />
             </Box>

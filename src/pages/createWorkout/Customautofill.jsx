@@ -1,7 +1,20 @@
 import React from "react";
-import CustomTextField from "./CustomtextField";
+import CustomTextField from "../../components/FormComponents/CustomtextField";
 import { Autocomplete, TextField, Chip, Box, Avatar } from "@mui/material";
-const CustomAutoComplete = ({ options, formik, name, setState, state }) => {
+const CustomAutoComplete = ({
+  options,
+  formik,
+  name,
+  setState,
+  item,
+  state,
+}) => {
+  console.log(
+    state.find((i) => i.list_id == item.list_id)?.selectedObject,
+    "kjaslkfj;sadkfj"
+  );
+
+  console.log(state, "the current state");
   return (
     <div style={{ marginBottom: "20px" }}>
       <Autocomplete
@@ -12,8 +25,9 @@ const CustomAutoComplete = ({ options, formik, name, setState, state }) => {
           thumbnail: data.thumbnailImage, // <-- Add image here
         }))}
         getOptionLabel={(option) => option.label}
-        // value={formik.values[name]}
-        value={null}
+        value={
+          state.find((i) => i.list_id == item.list_id)?.selectedObject || null
+        }
         renderOption={(props, option) => (
           <li {...props} key={option.id}>
             <Box
@@ -38,6 +52,23 @@ const CustomAutoComplete = ({ options, formik, name, setState, state }) => {
           </li>
         )}
         onChange={(e, newValue) => {
+          console.log("new value", newValue);
+          if (newValue) {
+            setState((prev) =>
+              prev.map((pd) =>
+                pd.list_id == item.list_id
+                  ? {
+                      ...pd,
+                      selectedObject: {
+                        id: newValue.id,
+                        label: newValue.label,
+                        thumbnail: newValue.thumbnail,
+                      },
+                    }
+                  : pd
+              )
+            );
+          }
           // formik.setFieldValue(name, newValue);
         }}
         sx={{

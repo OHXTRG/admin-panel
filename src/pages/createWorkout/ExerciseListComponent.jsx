@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Box, IconButton, Typography } from "@mui/material";
-import CustomAutoComplete from "../../components/FormComponents/CustomAutoFill";
+// import CustomAutoComplete from "../../components/FormComponents/CustomAutoFill";
+import CustomAutoComplete from "./Customautofill";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import DeleteIcon from "../../assets/icons/deleteIcon.svg";
 
@@ -57,6 +58,9 @@ const ExerciseListComponent = ({
           name="exercises"
           formik={formik}
           options={options}
+          setState={setExerciseList}
+          state={exerciseList}
+          item={exerciseItem}
         />
       </Box>
     </Box>
