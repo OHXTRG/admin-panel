@@ -9,13 +9,14 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import ProtectedRoute from "../utils/ProtectedRoutes";
 import { useSelector } from "react-redux";
-
+import { RedirectToAdmin } from "../utils/RedirectRoutes";
 const Index = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
 
   return (
     <>
       <Routes>
+        <Route path="/" element={<RedirectToAdmin />} />
         <Route path="admin" errorElement={<ErrorPage />}>
           <Route path="login" element={<Authenticate />} />
           <Route

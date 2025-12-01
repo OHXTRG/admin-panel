@@ -12,14 +12,16 @@ const Index = ({ rows, columns, deleteHandler, loading }) => {
     <>
       <table className="simple-table">
         <thead>
-          {columns.map((item, index) => (
-            <th
-              key={`table-head-users-${index}`}
-              style={item?.width ? { width: item.width } : {}}
-            >
-              {item.lable}
-            </th>
-          ))}
+          <tr>
+            {columns.map((item, index) => (
+              <th
+                key={`table-head-users-${index}`}
+                style={item?.width ? { width: item.width } : {}}
+              >
+                {item.lable}
+              </th>
+            ))}
+          </tr>
         </thead>
         {loading ? (
           "...loading"
@@ -80,7 +82,7 @@ const Index = ({ rows, columns, deleteHandler, loading }) => {
                 {columns.map((col) => {
                   if (col.name == "action") {
                     return (
-                      <td>
+                      <td style={col?.width ? { width: col.width } : {}}>
                         {columns
                           .filter((head) => head.name == "action")?.[0]
                           ["actions"].map((action) => {
@@ -128,7 +130,7 @@ const Index = ({ rows, columns, deleteHandler, loading }) => {
                   }
                   if (col.type == "img") {
                     return (
-                      <td>
+                      <td style={col?.width ? { width: col.width } : {}}>
                         <div className="img-wrapper">
                           <img src={item[col.name]} className="img-class" />
                         </div>
@@ -136,7 +138,7 @@ const Index = ({ rows, columns, deleteHandler, loading }) => {
                     );
                   } else {
                     return (
-                      <td>
+                      <td style={col?.width ? { width: col.width } : {}}>
                         <p>{item[col.name]}</p>
                       </td>
                     );

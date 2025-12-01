@@ -16,7 +16,6 @@ const DashboardLayout = () => {
       }}
       className="main-wrapper"
     >
-      {/* <AuthHeader /> */}
       <Box
         sx={{ flexGrow: "1", display: "flex", gap: "20px", height: "100%" }}
         className="main"
