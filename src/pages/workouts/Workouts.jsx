@@ -4,6 +4,7 @@ import { workouts } from "../../../workout";
 import DataTable from "../../components/dataTable/simpleTable/Index";
 import AddIcon from "@mui/icons-material/Add";
 import "./workout.css";
+import { useNavigate } from "react-router";
 
 const recentWorkoutColumns = [
   { name: "workout", lable: "Workout Name", width: "60%" },
@@ -17,6 +18,7 @@ const recentWorkoutColumns = [
 ];
 
 const Workout = () => {
+  const navigate = useNavigate();
   const deleteHandler = useCallback((data) => {
     console.log(`Delete handler called with data : ${data}`, data);
   }, []);
@@ -28,7 +30,10 @@ const Workout = () => {
         </Typography>
 
         <Box className="button-wrapper">
-          <Button className="create-workout">
+          <Button
+            className="create-workout"
+            onClick={() => navigate("create-workout")}
+          >
             <AddIcon />
             Create Workout
           </Button>

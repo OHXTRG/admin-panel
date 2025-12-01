@@ -1,0 +1,43 @@
+.Exercise-head-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.create-exercise-form-wrapper {
+  background: linear-gradient(180deg, #fdfdff 0%, #f3f6ff 100%);
+  box-shadow: 4px 0px 24px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+}
+
+.create-exercise-form-wrapper .create-exercise-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.create-exercise-form-wrapper .create-exercise-form .form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.create-exercise-form-wrapper .create-exercise-form .form-button-c {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+}
+
+.form-button {
+  border-radius: 5px !important;
+  padding: 10px 20px !important;
+}
+
+.save-button {
+  background-color: #3758f9 !important;
+  color: white !important;
+}
+
+.cancel-button {
+  background-color: transparent !important;
+  color: #111928 !important;
+  border: 1px solid #111928 !important;
+}

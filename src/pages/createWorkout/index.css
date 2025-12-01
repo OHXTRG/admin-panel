@@ -1,0 +1,11 @@
+.create-workout-form-head {
+  font-size: 24px !important;
+  font-weight: 700 !important;
+}
+
+.exercise-select {
+  background-color: #f2f4ff;
+  border-radius: 8px;
+  display: flex;
+  padding: 10px;
+}

@@ -6,8 +6,12 @@ import Exercises from "../pages/Exercise/Exercises";
 import Workouts from "../pages/workouts/Workouts";
 import Settings from "../pages/Settings";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import CreateExercise from "../pages/createExercise/Index";
+import CreateWorkout from "../pages/createWorkout/Index";
 import DashboardLayout from "../Layouts/DashboardLayout";
+
 import ProtectedRoute from "../utils/ProtectedRoutes";
+
 import { useSelector } from "react-redux";
 import { RedirectToAdmin } from "../utils/RedirectRoutes";
 const Index = () => {
@@ -37,20 +41,54 @@ const Index = () => {
             />
             <Route
               path="workouts"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <Workouts />
-                </ProtectedRoute>
-              }
-            />
+              // element={
+              //   <ProtectedRoute isAuthenticated={isAuthenticated}>
+              //     <Workouts />
+              //   </ProtectedRoute>
+              // }
+            >
+              <Route
+                index
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <Workouts />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="create-workout"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <CreateWorkout />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
             <Route
               path="exercises"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <Exercises />
-                </ProtectedRoute>
-              }
-            />
+              // element={
+              //   <ProtectedRoute isAuthenticated={isAuthenticated}>
+              //     <Exercises />
+              //   </ProtectedRoute>
+              // }
+            >
+              <Route
+                index
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <Exercises />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="create-exercise"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <CreateExercise />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
             <Route
               path="settings"
               element={

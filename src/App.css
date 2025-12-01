@@ -8,3 +8,7 @@
   padding: 20px;
   /* height: 100%; */
 }
+
+.custom-form-error {
+  color: red !important;
+}

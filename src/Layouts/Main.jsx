@@ -5,7 +5,12 @@ const Main = ({ children }) => {
   return (
     <Box
       className="layout-main"
-      sx={{ flexGrow: "1", height: "100%", overflow: "auto" }}
+      sx={{
+        flexGrow: "1",
+        height: "100%",
+        overflow: "auto",
+        // width: "min-content",
+      }}
     >
       <Box className="main-wrapper-inner">{children}</Box>
     </Box>

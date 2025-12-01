@@ -4,6 +4,7 @@ import { workouts } from "../../../workout";
 import DataTable from "../../components/dataTable/simpleTable/Index";
 import AddIcon from "@mui/icons-material/Add";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 const recentWorkoutColumns = [
   { name: "thumbnailImage", lable: "Image", width: "20%", type: "img" },
@@ -11,7 +12,7 @@ const recentWorkoutColumns = [
   {
     name: "action",
     lable: "Action",
-    actions: [{ name: "Delete" }, { name: "Edit", navigate: "viewUser" }],
+    actions: [{ name: "Delete" }, { name: "Edit", navigate: "edit-exercise" }],
     width: "20%",
   },
 ];
@@ -19,6 +20,7 @@ const recentWorkoutColumns = [
 const Workout = () => {
   const exercisesData = useSelector((state) => state.exerciseState);
   const [exerciseRows, setExerciseRows] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     console.log(exercisesData, "exerdata sta");
     if (!exercisesData.loading && !exercisesData.error) {
@@ -30,7 +32,7 @@ const Workout = () => {
     }
   }, [exercisesData]);
 
-  console.log(exerciseRows, "rows rows are set");
+  // console.log(exerciseRows, "rows rows are set");
 
   const deleteHandler = useCallback((data) => {
     console.log(`Delete handler called with data : ${data}`, data);
@@ -43,7 +45,10 @@ const Workout = () => {
         </Typography>
 
         <Box className="button-wrapper">
-          <Button className="create-workout">
+          <Button
+            className="create-workout"
+            onClick={() => navigate("create-exercise")}
+          >
             <AddIcon />
             Create Exercise
           </Button>
@@ -54,6 +59,7 @@ const Workout = () => {
         <Box className="table-wrapper">
           <DataTable
             columns={recentWorkoutColumns}
+            // rows={exerciseRows?.slice(0, 1)}
             rows={exerciseRows}
             deleteHandler={{
               func: deleteHandler,

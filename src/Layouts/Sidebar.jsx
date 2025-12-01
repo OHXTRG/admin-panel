@@ -199,7 +199,10 @@ function Sidebar() {
     const currentPath = pathname?.split("/");
     let pageOpen = currentPath.pop();
 
-    if (pageOpen === page) {
+    if (
+      pageOpen === page ||
+      (currentPath.includes(page) && page !== "dashboard")
+    ) {
       return true;
     } else {
       return false;
@@ -240,6 +243,7 @@ function Sidebar() {
         background: "linear-gradient(180deg, #FDFDFF 0%, #F3F6FF 100%)",
         boxShadow: "4px 0px 24px rgba(0, 0, 0, 0.08)",
         width: "270px",
+        flexShrink: "0",
       }}
     >
       <Box sx={{ flexGrow: "1" }}>

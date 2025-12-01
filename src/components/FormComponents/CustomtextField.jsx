@@ -7,7 +7,7 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-root": {
     backgroundColor: "white", // Light gray background
     borderRadius: "8px",
-    padding: "15px 15px",
+    padding: "10px 15px",
     border: "1px solid #e5e7eb", // Light border
   },
   "& .MuiInputLabel-root": {
